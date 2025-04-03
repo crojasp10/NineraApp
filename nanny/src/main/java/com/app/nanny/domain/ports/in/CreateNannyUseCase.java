@@ -1,11 +1,10 @@
 package com.app.nanny.domain.ports.in;
 
-import com.app.nanny.domain.models.Nanny;
+import com.app.nanny.domain.models.NannyCar;
 
 public interface CreateNannyUseCase {
 
-    Nanny createNanny(Nanny nanny);
-
+    NannyCar createNanny(NannyCar nanny);
 
 
 }
