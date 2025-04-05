@@ -3,6 +3,7 @@ package com.app.nanny.domain.ports.out;
 import com.app.nanny.domain.models.NannyCar;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface NannyRepositoryPort {
@@ -13,7 +14,7 @@ public interface NannyRepositoryPort {
 
     List<NannyCar> findAll();
 
-    NannyCar update();
+    Optional<NannyCar> update();
 
     boolean deleteById(Long id);
 }
