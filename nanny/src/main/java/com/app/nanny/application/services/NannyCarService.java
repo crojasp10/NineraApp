@@ -1,10 +1,10 @@
 package com.app.nanny.application.services;
 
-import com.app.nanny.application.usecases.CreateNannyCarUseCaseImpl;
 import com.app.nanny.domain.models.NannyCar;
 import com.app.nanny.domain.ports.in.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class NannyCarService implements CreateNannyUseCase, UpdateNannyUseCase, DeleteNannyUseCase, RetrieveNannyUseCase {
 
@@ -34,7 +34,7 @@ public class NannyCarService implements CreateNannyUseCase, UpdateNannyUseCase, 
     }
 
     @Override
-    public NannyCar updateNanny(Long id, NannyCar nanny) {
+    public Optional<NannyCar> updateNanny(Long id, NannyCar nanny) {
         return updateNannyUseCase.updateNanny(id,nanny);
     }
 

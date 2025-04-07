@@ -14,7 +14,7 @@ public interface NannyRepositoryPort {
 
     List<NannyCar> findAll();
 
-    Optional<NannyCar> update();
+    Optional<NannyCar> update(NannyCar nannyCar, Long id);
 
     boolean deleteById(Long id);
 }
