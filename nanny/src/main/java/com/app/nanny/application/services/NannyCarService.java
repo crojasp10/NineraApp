@@ -1,12 +1,13 @@
 package com.app.nanny.application.services;
 
+import com.app.nanny.domain.models.Location;
 import com.app.nanny.domain.models.NannyCar;
 import com.app.nanny.domain.ports.in.*;
 
 import java.util.List;
 import java.util.Optional;
 
-public class NannyCarService implements CreateNannyUseCase, UpdateNannyUseCase, DeleteNannyUseCase, RetrieveNannyUseCase {
+public class NannyCarService implements CreateNannyUseCase, UpdateNannyUseCase, DeleteNannyUseCase, RetrieveNannyUseCase, GetLocationUseCase {
 
     private final CreateNannyUseCase createNannyUseCase;
     private final UpdateNannyUseCase updateNannyUseCase;
@@ -46,5 +47,11 @@ public class NannyCarService implements CreateNannyUseCase, UpdateNannyUseCase, 
     @Override
     public List<NannyCar> getAllNanny() {
         return retrieveNannyUseCase.getAllNanny();
+    }
+
+
+    @Override
+    public Location getLocation(Long id) {
+        return getLocationUseCase.getLocation(id);
     }
 }
