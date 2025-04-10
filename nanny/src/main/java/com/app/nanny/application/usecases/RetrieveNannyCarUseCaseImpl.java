@@ -5,6 +5,7 @@ import com.app.nanny.domain.ports.in.RetrieveNannyUseCase;
 import com.app.nanny.domain.ports.out.NannyRepositoryPort;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RetrieveNannyCarUseCaseImpl implements RetrieveNannyUseCase {
 
@@ -15,7 +16,7 @@ public class RetrieveNannyCarUseCaseImpl implements RetrieveNannyUseCase {
     }
 
     @Override
-    public NannyCar getNanny(Long id) {
+    public Optional<NannyCar> getNanny(Long id) {
         return nannyRepositoryPort.findById(id);
     }
 

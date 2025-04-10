@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -25,22 +26,39 @@ public class JpaNannyCarRepositoryAdapter implements NannyRepositoryPort {
     }
 
     @Override
-    public NannyCar findById(Long id) {
-        return null;
+    public Optional <NannyCar> findById(Long id) {
+        return jpaNannyCarRepository.findById(id)
+                .map(NannyCarMapper.INSTANCE::toModel);
     }
 
     @Override
     public List<NannyCar> findAll() {
-        return null;
+        return jpaNannyCarRepository.findAll().stream().map(NannyCarMapper.INSTANCE::toModel)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<NannyCar> update(NannyCar nannyCar, Long id) {
+
+        if(jpaNannyCarRepository.existsById(nannyCar.getId())){
+            NannyCarEntity nannyCarEntity = NannyCarMapper.INSTANCE.toEntity(nannyCar);
+            NannyCarEntity updatedNannyCarEntity = jpaNannyCarRepository.save(nannyCarEntity);
+            return Optional.of(NannyCarMapper.INSTANCE.toModel(updatedNannyCarEntity));
+        }
         return Optional.empty();
     }
 
     @Override
     public boolean deleteById(Long id) {
+
+        if(jpaNannyCarRepository.existsById(id)) {
+            jpaNannyCarRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
+
+
+
+
 }

@@ -10,7 +10,7 @@ public interface NannyRepositoryPort {
 
     NannyCar save(NannyCar nanny);
 
-    NannyCar findById(Long id);
+    Optional <NannyCar> findById(Long id);
 
     List<NannyCar> findAll();
 
