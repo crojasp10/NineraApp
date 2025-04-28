@@ -9,11 +9,8 @@ import org.mapstruct.factory.Mappers;
 /*UsuarioEntity entity = new UsuarioEntity("Juan", "juan@correo.com");
 Usuario model = UsuarioMapper.INSTANCE.toModel(entity);*/
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface NannyCarMapper {
-
-
-    NannyCarMapper INSTANCE = Mappers.getMapper(NannyCarMapper.class);
 
     NannyCar toModel(NannyCarEntity nannyCarEntity);
 

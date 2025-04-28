@@ -5,6 +5,7 @@ import com.app.nanny.domain.models.NannyCar;
 import com.app.nanny.domain.ports.out.NannyRepositoryPort;
 import com.app.nanny.infrastructure.entities.NannyCarEntity;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,28 +13,29 @@ import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
+@Repository
 public class JpaNannyCarRepositoryAdapter implements NannyRepositoryPort {
 
-
+    private final NannyCarMapper mapper;
     private final JpaNannyCarRepository jpaNannyCarRepository;
 
 
     @Override
     public NannyCar save(NannyCar nanny) {
-        NannyCarEntity nannyCarEntity = NannyCarMapper.INSTANCE.toEntity(nanny);
+        NannyCarEntity nannyCarEntity = mapper.toEntity(nanny);
         NannyCarEntity savedNannyCarEntity = jpaNannyCarRepository.save(nannyCarEntity);
-        return NannyCarMapper.INSTANCE.toModel(savedNannyCarEntity);
+        return mapper.toModel(savedNannyCarEntity);
     }
 
     @Override
     public Optional <NannyCar> findById(Long id) {
         return jpaNannyCarRepository.findById(id)
-                .map(NannyCarMapper.INSTANCE::toModel);
+                .map(mapper::toModel);
     }
 
     @Override
     public List<NannyCar> findAll() {
-        return jpaNannyCarRepository.findAll().stream().map(NannyCarMapper.INSTANCE::toModel)
+        return jpaNannyCarRepository.findAll().stream().map(mapper::toModel)
                 .collect(Collectors.toList());
     }
 
@@ -41,9 +43,9 @@ public class JpaNannyCarRepositoryAdapter implements NannyRepositoryPort {
     public Optional<NannyCar> update(NannyCar nannyCar, Long id) {
 
         if(jpaNannyCarRepository.existsById(nannyCar.getId())){
-            NannyCarEntity nannyCarEntity = NannyCarMapper.INSTANCE.toEntity(nannyCar);
+            NannyCarEntity nannyCarEntity = mapper.toEntity(nannyCar);
             NannyCarEntity updatedNannyCarEntity = jpaNannyCarRepository.save(nannyCarEntity);
-            return Optional.of(NannyCarMapper.INSTANCE.toModel(updatedNannyCarEntity));
+            return Optional.of(mapper.toModel(updatedNannyCarEntity));
         }
         return Optional.empty();
     }
