@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    public NannyCarService nannyCarService(NannyRepositoryPort nannyRepositoryPort, GetLocationUseCase getLocationUseCase){
+    public NannyCarService nannyCarService(NannyRepositoryPort nannyRepositoryPort, GetLocationUseCase getLocationUseCase, LocationConfig locationConfig){
 
         return new NannyCarService(
                 new CreateNannyCarUseCaseImpl(nannyRepositoryPort),
                 new UpdateNannyCarUseCaseImpl(nannyRepositoryPort),
-                new RetrieveNannyCarUseCaseImpl(nannyRepositoryPort),
+                new RetrieveNannyCarUseCaseImpl(nannyRepositoryPort, locationConfig),
                 new DeleteNannyCarUseCaseImpl(nannyRepositoryPort),
                 getLocationUseCase
         );

@@ -10,6 +10,7 @@ import lombok.Setter;
 @Builder
 public class Location {
 
+    private Long id;
     private Double latitude;
     private Double longitude;
     private String address;
