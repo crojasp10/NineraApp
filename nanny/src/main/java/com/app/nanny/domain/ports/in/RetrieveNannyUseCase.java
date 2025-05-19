@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface RetrieveNannyUseCase {
 
-    Optional<NannyCar> getNanny(Long id);
+    Optional<NannyCar> getNanny(Long id,String key, String model);
     List<NannyCar> getAllNanny();
 
 }

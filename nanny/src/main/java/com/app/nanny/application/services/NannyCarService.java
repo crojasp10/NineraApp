@@ -40,8 +40,8 @@ public class NannyCarService implements CreateNannyUseCase, UpdateNannyUseCase, 
     }
 
     @Override
-    public Optional<NannyCar> getNanny(Long id) {
-        return retrieveNannyUseCase.getNanny(id);
+    public Optional<NannyCar> getNanny(Long id,String key, String model) {
+        return retrieveNannyUseCase.getNanny(id,key, model);
     }
 
     @Override

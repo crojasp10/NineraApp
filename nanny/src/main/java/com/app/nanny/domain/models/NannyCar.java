@@ -3,6 +3,8 @@ package com.app.nanny.domain.models;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -15,6 +17,7 @@ public class NannyCar {
         private String idDriver;
         private Integer availablePlates;
         private Location location;
+        private List<Vehicle> vehicles;
 
 
 }

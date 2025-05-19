@@ -6,6 +6,7 @@ import com.app.nanny.application.usecases.*;
 import com.app.nanny.domain.ports.in.GetLocationUseCase;
 import com.app.nanny.domain.ports.out.ExternalServicePort;
 import com.app.nanny.domain.ports.out.NannyRepositoryPort;
+import com.app.nanny.infrastructure.client.VehicleClient;
 import com.app.nanny.infrastructure.repositories.JpaNannyCarRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +15,13 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    public NannyCarService nannyCarService(NannyRepositoryPort nannyRepositoryPort, GetLocationUseCase getLocationUseCase, LocationConfig locationConfig){
+    public NannyCarService nannyCarService(NannyRepositoryPort nannyRepositoryPort, GetLocationUseCase getLocationUseCase, LocationConfig locationConfig,VehicleClient vehicleClient){
+
 
         return new NannyCarService(
                 new CreateNannyCarUseCaseImpl(nannyRepositoryPort),
                 new UpdateNannyCarUseCaseImpl(nannyRepositoryPort),
-                new RetrieveNannyCarUseCaseImpl(nannyRepositoryPort, locationConfig),
+                new RetrieveNannyCarUseCaseImpl(nannyRepositoryPort, locationConfig, vehicleClient),
                 new DeleteNannyCarUseCaseImpl(nannyRepositoryPort),
                 getLocationUseCase
         );

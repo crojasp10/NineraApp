@@ -37,8 +37,8 @@ public class NannyCarController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<NannyCar> getNannyById(@PathVariable Long id){
-        Optional<NannyCar> nanny = nannyCarService.getNanny(id);
+    public ResponseEntity<NannyCar> getNannyById(@PathVariable Long id,@RequestHeader String key, @RequestParam String model){
+        Optional<NannyCar> nanny = nannyCarService.getNanny(id,key,model);
         if(!nanny.isPresent()){
             throw  new ResourceNotFoundException("NannyCar not found id " + id);
         }
