@@ -2,7 +2,10 @@ package com.app.nanny.application.services;
 
 import com.app.nanny.domain.models.Location;
 import com.app.nanny.domain.models.NannyCar;
+import com.app.nanny.domain.models.PageResponse;
 import com.app.nanny.domain.ports.in.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +52,10 @@ public class NannyCarService implements CreateNannyUseCase, UpdateNannyUseCase, 
         return retrieveNannyUseCase.getAllNanny();
     }
 
+    @Override
+    public PageResponse<NannyCar> getAllNanny(Pageable pageable) {
+        return retrieveNannyUseCase.getAllNanny(pageable);
+    }
 
     @Override
     public Location getLocation(Long id) {

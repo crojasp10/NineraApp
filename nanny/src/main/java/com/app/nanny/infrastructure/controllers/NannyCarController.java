@@ -3,10 +3,11 @@ package com.app.nanny.infrastructure.controllers;
 
 import com.app.nanny.application.services.NannyCarService;
 import com.app.nanny.domain.models.NannyCar;
-import com.app.nanny.infrastructure.error.ResourceNotFoundException;
+import com.app.nanny.domain.models.PageResponse;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,9 +40,14 @@ public class NannyCarController {
     @GetMapping("/{id}")
     public ResponseEntity<NannyCar> getNannyById(@PathVariable Long id,@RequestHeader String key, @RequestParam String model){
         Optional<NannyCar> nanny = nannyCarService.getNanny(id,key,model);
-        if(!nanny.isPresent()){
-            throw  new ResourceNotFoundException("NannyCar not found id " + id);
-        }
         return ResponseEntity.ok(nanny.get());
     }
+
+    @GetMapping("/pages")
+    public PageResponse<NannyCar> getAllNannyPage(Pageable pageable) {
+        return nannyCarService.getAllNanny(pageable);
+    }
+
+
+
 }

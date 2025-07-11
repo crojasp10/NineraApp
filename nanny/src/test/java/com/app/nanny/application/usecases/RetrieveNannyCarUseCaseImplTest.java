@@ -6,6 +6,7 @@ import com.app.nanny.domain.models.Vehicle;
 import com.app.nanny.domain.ports.out.NannyRepositoryPort;
 import com.app.nanny.infrastructure.client.VehicleClient;
 import com.app.nanny.infrastructure.config.LocationConfig;
+import com.app.nanny.infrastructure.repositories.JpaNannyCarRepository;
 import com.app.nanny.infrastructure.repositories.JpaNannyCarRepositoryAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,10 @@ class RetrieveNannyCarUseCaseImplTest {
     private NannyRepositoryPort nannyRepositoryPort;
 
     @Mock
+    private JpaNannyCarRepository jpaNannyCarRepository;
+
+
+    @Mock
     private LocationConfig locationConfig;
 
     @InjectMocks
@@ -42,7 +47,7 @@ class RetrieveNannyCarUseCaseImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        retrieveNannyCarUseCase = new RetrieveNannyCarUseCaseImpl(nannyRepositoryPort, locationConfig, vehicleClient);
+        retrieveNannyCarUseCase = new RetrieveNannyCarUseCaseImpl(nannyRepositoryPort, locationConfig, vehicleClient, jpaNannyCarRepository);
     }
 
     @Test
@@ -100,10 +105,5 @@ class RetrieveNannyCarUseCaseImplTest {
         assertNotNull(result.get(0).getVehicles());
         assertEquals("Rio", result.get(0).getVehicles().get(0).getModel());
     }
-
-
-
-
-
 
 }

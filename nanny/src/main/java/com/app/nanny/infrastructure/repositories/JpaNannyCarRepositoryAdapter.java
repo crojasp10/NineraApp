@@ -1,10 +1,14 @@
 package com.app.nanny.infrastructure.repositories;
 
 import com.app.nanny.application.mapper.NannyCarMapper;
+import com.app.nanny.application.mapper.PageMapper;
 import com.app.nanny.domain.models.NannyCar;
+import com.app.nanny.domain.models.PageResponse;
 import com.app.nanny.domain.ports.out.NannyRepositoryPort;
 import com.app.nanny.infrastructure.entities.NannyCarEntity;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,6 +22,7 @@ public class JpaNannyCarRepositoryAdapter implements NannyRepositoryPort {
 
     private final NannyCarMapper mapper;
     private final JpaNannyCarRepository jpaNannyCarRepository;
+    private final PageMapper pageMapper;
 
 
     @Override
@@ -60,7 +65,16 @@ public class JpaNannyCarRepositoryAdapter implements NannyRepositoryPort {
         return false;
     }
 
+    @Override
+    public Page<NannyCar> findAll(Pageable pageable) {
 
+
+        return jpaNannyCarRepository
+                .findAll(pageable)
+                .map(mapper::toModel);
+
+
+    }
 
 
 }

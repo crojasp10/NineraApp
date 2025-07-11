@@ -6,5 +6,4 @@ public interface CreateNannyUseCase {
 
     NannyCar createNanny(NannyCar nanny);
 
-
 }
